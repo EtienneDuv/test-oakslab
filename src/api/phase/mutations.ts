@@ -1,18 +1,18 @@
 import {
     MutationCreatePhaseArgs,
     MutationDeletePhaseArgs,
-    MutationUpdatePhaseArgs
+    MutationUpdatePhaseArgs,
 } from '../../generated/types';
 import {save} from '../../database';
 
 export const phaseMutations = {
     createPhase: async (_parent: unknown, args: MutationCreatePhaseArgs) => {
         save('phase', {name: args.name});
-        return true;    // mimics how Sequelize
+        return true; // mimics how Sequelize says if update/delete worked or not
     },
     updatePhase: async (_parent: unknown, args: MutationUpdatePhaseArgs) => {
         save('phase', {name: args.name}, Number(args.phaseId));
-        return true;    // mimics how Sequelize
+        return true;
     },
     deletePhase: async (_parent: unknown, _args: MutationDeletePhaseArgs) => {
         // TODO

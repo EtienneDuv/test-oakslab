@@ -2,6 +2,7 @@ type Phase {
   id: ID!
   name: String!
   completed: Boolean!
+  tasks: [Task]!
 }
 
 type Query {

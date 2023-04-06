@@ -1,10 +1,18 @@
-// import {PhaseModel, CommentModel, ChildCommentModel, UserModel} from '../../database/models';
-// import {PhaseCommentsArgs} from '../../generated/types';
-// import {LooseObject} from '../../interfaces';
+import {findAll} from '../../database';
+import {Task, Phase} from 'src/generated/types';
 
 export const phaseResolvers = {
-    completed: (parent: object): boolean => {
-        // check child tasks
-        return true;
+    completed: (parent: Phase): boolean => {
+        const phaseId = parent.id;
+        const tasks = findAll('task') as Task[];
+        const childTasks = tasks.filter(el => el.phaseId === phaseId);
+
+        return childTasks.every(el => el.completed === true);
+    },
+    tasks: (parent: Phase): Task[] => {
+        const phaseId = parent.id;
+        const tasks = findAll('task') as Task[];
+        const childTasks = tasks.filter(el => el.phaseId === phaseId);
+        return childTasks;
     },
 };
