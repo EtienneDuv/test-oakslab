@@ -8,6 +8,7 @@ import express from 'express';
 
 import {typeDefs, resolvers} from './api';
 import {config} from './config';
+import {seedData} from './database';
 
 const main = async () => {
     const app = express();
@@ -30,10 +31,12 @@ const main = async () => {
         }),
     );
 
-    const {APP_PORT, NODE_ENV} = config;
+    const {APP_PORT} = config;
     httpServer.listen({port: APP_PORT}, () => {
         console.log(`Example app listening at http://localhost:${APP_PORT}`);
     });
+
+    seedData();
 };
 
 main();

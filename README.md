@@ -7,11 +7,12 @@
 Every  startup  goes  through  several  stages.  In  every  stage,  there  are 
 necessary steps to be accomplished. Create a simple application that documents this progress.
 
-Requirements - Backend:
-• Implement a GraphQL using Node.js
-• Store the progress in memory (not database)
-• Design a database schema to store the data
+**Requirements - Backend:**
+- Implement a GraphQL using Node.js
+- Store the progress in memory (not database)
+- Design a database schema to store the data
 
+**Tech stack**
 - Node.js
 - GraphQL
 - Typescript

@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import NodeCache from 'node-cache';
 
 dotenv.config();
 
@@ -22,10 +23,12 @@ class Config {
     APP_PORT: number;
     @required
     NODE_ENV: string;
+    db: NodeCache;
 
     constructor (env: DotenvFile) {
         this.APP_PORT = Number(env.APP_PORT);
         this.NODE_ENV = String(env.NODE_ENV);
+        this.db = new NodeCache({checkperiod: 0});
     }
 }
 
@@ -33,5 +36,3 @@ export const config = new Config({
     APP_PORT: process.env.APP_PORT,
     NODE_ENV: process.env.NODE_ENV,
 });
-
-console.log(config);
