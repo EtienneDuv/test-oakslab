@@ -23,7 +23,7 @@ export const findAll = (type: Type): LooseObject[] => {
         .map(key => db.get(key)) as LooseObject[];
 };
 
-export const save = (type: Type, value: object, id ?: number) => {
+export const save = (type: Type, value: LooseObject, id ?: number) => {
     if (id) {
         const items = findAll(type);
         const index = items.findIndex(el => el.id === id);
@@ -32,21 +32,24 @@ export const save = (type: Type, value: object, id ?: number) => {
             .filter(key => key.startsWith(type));
         const key = keys[index];
 
-        db.set(key, {
+        return db.set(key, {
             ...items[index],
             ...value
         });
     }
-    else {
-        const currentIdPropertyName = 'current' + type.charAt(0).toUpperCase() + type.slice(1) + 'Id';
-        const index = Number(db.get(currentIdPropertyName)) + 1;
-
-        db.set(type + index, {
-            ...value,
-            id: index
-        });
-        db.set(currentIdPropertyName, index);
+    else if (type === 'task') {
+        // if phaseId doesn't exist, it will throw an error
+        if (value?.phaseId) find('phase', 'id', value.phaseId);
     }
+
+    const currentTypeMaxId = 'current' + type.charAt(0).toUpperCase() + type.slice(1) + 'Id';
+    const index = Number(db.get(currentTypeMaxId)) + 1;
+
+    db.set(type + index, {
+        ...value,
+        id: index
+    });
+    db.set(currentTypeMaxId, index);
 };
 
 

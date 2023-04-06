@@ -16,14 +16,28 @@ export type Scalars = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  completeTask: Scalars['Boolean'];
   createPhase?: Maybe<Scalars['Boolean']>;
+  createTask: Scalars['Boolean'];
   deletePhase?: Maybe<Scalars['Boolean']>;
   updatePhase?: Maybe<Scalars['Boolean']>;
 };
 
 
+export type MutationCompleteTaskArgs = {
+  taskId: Scalars['ID'];
+};
+
+
 export type MutationCreatePhaseArgs = {
   name: Scalars['String'];
+};
+
+
+export type MutationCreateTaskArgs = {
+  description?: InputMaybe<Scalars['String']>;
+  phaseId: Scalars['ID'];
+  title: Scalars['String'];
 };
 
 
@@ -42,12 +56,15 @@ export type Phase = {
   completed: Scalars['Boolean'];
   id: Scalars['ID'];
   name: Scalars['String'];
+  tasks: Array<Maybe<Task>>;
 };
 
 export type Query = {
   __typename?: 'Query';
   getPhase: Phase;
   getPhases: Array<Phase>;
+  getTask: Task;
+  getTasks: Array<Task>;
 };
 
 
@@ -58,6 +75,25 @@ export type QueryGetPhaseArgs = {
 
 export type QueryGetPhasesArgs = {
   limit?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryGetTaskArgs = {
+  taskId: Scalars['ID'];
+};
+
+
+export type QueryGetTasksArgs = {
+  phaseId: Scalars['ID'];
+};
+
+export type Task = {
+  __typename?: 'Task';
+  completed: Scalars['Boolean'];
+  description: Scalars['String'];
+  id: Scalars['ID'];
+  phaseId: Scalars['ID'];
+  title: Scalars['String'];
 };
 
 
@@ -136,6 +172,7 @@ export type ResolversTypes = {
   Phase: ResolverTypeWrapper<Phase>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  Task: ResolverTypeWrapper<Task>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -147,10 +184,13 @@ export type ResolversParentTypes = {
   Phase: Phase;
   Query: {};
   String: Scalars['String'];
+  Task: Task;
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  completeTask?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationCompleteTaskArgs, 'taskId'>>;
   createPhase?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationCreatePhaseArgs, 'name'>>;
+  createTask?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationCreateTaskArgs, 'phaseId' | 'title'>>;
   deletePhase?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationDeletePhaseArgs, 'phaseId'>>;
   updatePhase?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationUpdatePhaseArgs, 'name' | 'phaseId'>>;
 };
@@ -159,17 +199,30 @@ export type PhaseResolvers<ContextType = any, ParentType extends ResolversParent
   completed?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  tasks?: Resolver<Array<Maybe<ResolversTypes['Task']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   getPhase?: Resolver<ResolversTypes['Phase'], ParentType, ContextType, RequireFields<QueryGetPhaseArgs, 'phaseId'>>;
   getPhases?: Resolver<Array<ResolversTypes['Phase']>, ParentType, ContextType, Partial<QueryGetPhasesArgs>>;
+  getTask?: Resolver<ResolversTypes['Task'], ParentType, ContextType, RequireFields<QueryGetTaskArgs, 'taskId'>>;
+  getTasks?: Resolver<Array<ResolversTypes['Task']>, ParentType, ContextType, RequireFields<QueryGetTasksArgs, 'phaseId'>>;
+};
+
+export type TaskResolvers<ContextType = any, ParentType extends ResolversParentTypes['Task'] = ResolversParentTypes['Task']> = {
+  completed?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  phaseId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
   Mutation?: MutationResolvers<ContextType>;
   Phase?: PhaseResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Task?: TaskResolvers<ContextType>;
 };
 
