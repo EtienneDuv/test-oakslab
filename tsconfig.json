@@ -15,7 +15,8 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
-    "outDir": "./build"
+    "outDir": "./build",
+    "experimentalDecorators": true
   },
   "typeRoots": [
     "./env.d.ts",

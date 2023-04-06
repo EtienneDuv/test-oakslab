@@ -7,7 +7,7 @@ import {json} from 'body-parser';
 import express from 'express';
 
 import {typeDefs, resolvers} from './api';
-import config from './config';
+import {config} from './config';
 
 const main = async () => {
     const app = express();
