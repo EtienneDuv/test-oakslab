@@ -1,5 +1,3 @@
-#TODO UPDATE THAT
-
 # Oak's lab test
 
 - [Assignment](./assignment.pdf)
@@ -24,7 +22,7 @@ necessary steps to be accomplished. Create a simple application that documents t
 
 Based on the assumption that we were logged in the company account, all the information accessible through this API belongs to us. Therefore, no additional verification is required. In a real app would of course have more safety locks.
 
-To reopen a task, I choose to change Task.completed field to status, so we have more flexibility
+To reopen a task, I choose to change Task.completed field to status, so we have more flexibility. That way we can extend the system and add more statuses if we ever need to.
 
 # Dev tools
 
@@ -34,12 +32,7 @@ When dev api is running (port 3000), `npm run codegen` generates the types from 
 
 These generated types (`src/generated/types.ts`) are used to type arguments of all resolvers. 
 
-# Run and try api
-
-## Dev environment
-
-**Run postgres container**
-`docker run --name devPostgres --env-file .env.dev -p 5432:5432 -d postgres`
+# Run api
 
 **Install dependencies**
 `npm i`
