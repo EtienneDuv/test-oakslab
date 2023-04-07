@@ -20,6 +20,10 @@ necessary steps to be accomplished. Create a simple application that documents t
 - Express
 - Apollo GraphQL
 
+# Choices
+
+Based on the assumption that we were logged in the company account, all the information accessible through this API belongs to us. Therefore, no additional verification is required. In a real app would of course have more safety locks.
+
 # Dev tools
 
 ## Codegen
@@ -43,9 +47,3 @@ These generated types (`src/generated/types.ts`) are used to type arguments of a
 
 **Access sandbox** 
 `localhost:3000`. You can play around and see documentation
-
-## Prod environment - docker-compose
-
-- `npm run compose:dev` will use `.env.dev` file. When hosting the api, we would run `npm run compose:prod` and copy `.env` file on the server.
-- try the api:
-  - Access Apollo sandbox at `http://localhost:13000`

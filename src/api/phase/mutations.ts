@@ -11,7 +11,7 @@ export const phaseMutations = {
         return true; // mimics how Sequelize says if update/delete worked or not
     },
     updatePhase: async (_parent: unknown, args: MutationUpdatePhaseArgs) => {
-        save('phase', {name: args.name}, Number(args.phaseId));
+        save('phase', {name: args.name}, args.phaseId);
         return true;
     },
     deletePhase: async (_parent: unknown, _args: MutationDeletePhaseArgs) => {

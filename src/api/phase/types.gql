@@ -1,5 +1,5 @@
 type Phase {
-  id: ID!
+  id: Int!
   name: String!
   completed: Boolean!
   tasks: [Task]!
@@ -7,11 +7,11 @@ type Phase {
 
 type Query {
   getPhases(limit: Int): [Phase!]!
-  getPhase(phaseId: ID!): Phase!
+  getPhase(phaseId: Int!): Phase!
 }
 
 type Mutation {
   createPhase(name: String!): Boolean
-  updatePhase(phaseId: ID!, name: String!): Boolean
-  deletePhase(phaseId: ID!): Boolean
+  updatePhase(phaseId: Int!, name: String!): Boolean
+  deletePhase(phaseId: Int!): Boolean
 }

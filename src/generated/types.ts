@@ -25,7 +25,7 @@ export type Mutation = {
 
 
 export type MutationCompleteTaskArgs = {
-  taskId: Scalars['ID'];
+  taskId: Scalars['Int'];
 };
 
 
@@ -36,25 +36,25 @@ export type MutationCreatePhaseArgs = {
 
 export type MutationCreateTaskArgs = {
   description?: InputMaybe<Scalars['String']>;
-  phaseId: Scalars['ID'];
+  phaseId: Scalars['Int'];
   title: Scalars['String'];
 };
 
 
 export type MutationDeletePhaseArgs = {
-  phaseId: Scalars['ID'];
+  phaseId: Scalars['Int'];
 };
 
 
 export type MutationUpdatePhaseArgs = {
   name: Scalars['String'];
-  phaseId: Scalars['ID'];
+  phaseId: Scalars['Int'];
 };
 
 export type Phase = {
   __typename?: 'Phase';
   completed: Scalars['Boolean'];
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   name: Scalars['String'];
   tasks: Array<Maybe<Task>>;
 };
@@ -69,7 +69,7 @@ export type Query = {
 
 
 export type QueryGetPhaseArgs = {
-  phaseId: Scalars['ID'];
+  phaseId: Scalars['Int'];
 };
 
 
@@ -79,20 +79,20 @@ export type QueryGetPhasesArgs = {
 
 
 export type QueryGetTaskArgs = {
-  taskId: Scalars['ID'];
+  taskId: Scalars['Int'];
 };
 
 
 export type QueryGetTasksArgs = {
-  phaseId: Scalars['ID'];
+  phaseId: Scalars['Int'];
 };
 
 export type Task = {
   __typename?: 'Task';
   completed: Scalars['Boolean'];
   description: Scalars['String'];
-  id: Scalars['ID'];
-  phaseId: Scalars['ID'];
+  id: Scalars['Int'];
+  phaseId: Scalars['Int'];
   title: Scalars['String'];
 };
 
@@ -166,7 +166,6 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
-  ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
   Phase: ResolverTypeWrapper<Phase>;
@@ -178,7 +177,6 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
-  ID: Scalars['ID'];
   Int: Scalars['Int'];
   Mutation: {};
   Phase: Phase;
@@ -197,7 +195,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type PhaseResolvers<ContextType = any, ParentType extends ResolversParentTypes['Phase'] = ResolversParentTypes['Phase']> = {
   completed?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   tasks?: Resolver<Array<Maybe<ResolversTypes['Task']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -213,8 +211,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 export type TaskResolvers<ContextType = any, ParentType extends ResolversParentTypes['Task'] = ResolversParentTypes['Task']> = {
   completed?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  phaseId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  phaseId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };

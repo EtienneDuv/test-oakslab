@@ -1,17 +1,17 @@
 type Task {
-  id: ID!
-  phaseId: ID!
+  id: Int!
+  phaseId: Int!
   title: String!
   description: String!
   completed: Boolean!
 }
 
 type Query {
-  getTasks(phaseId: ID!): [Task!]!
-  getTask(taskId: ID!): Task!
+  getTasks(phaseId: Int!): [Task!]!
+  getTask(taskId: Int!): Task!
 }
 
 type Mutation {
-  createTask(phaseId: ID!, title: String!, description: String): Boolean!
-  completeTask(taskId: ID!): Boolean!
+  createTask(phaseId: Int!, title: String!, description: String): Boolean!
+  completeTask(taskId: Int!): Boolean!
 }
