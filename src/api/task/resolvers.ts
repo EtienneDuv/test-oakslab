@@ -1,6 +1,10 @@
-// import {TaskModel, CommentModel, ChildCommentModel, UserModel} from '../../database/models';
-// import {TaskCommentsArgs} from '../../generated/types';
-// import {LooseObject} from '../../interfaces';
+import {findAll} from '../../database';
+import {Task, Status} from 'src/generated/types';
 
 export const taskResolvers = {
+    status: (parent: Task) => {
+        const statusId = parent.statusId;
+        const statuses = findAll('status') as Status[];
+        return statuses.find(el => el.id === statusId);
+    },
 };

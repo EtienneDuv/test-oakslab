@@ -7,7 +7,7 @@ export const phaseResolvers = {
         const tasks = findAll('task') as Task[];
         const childTasks = tasks.filter(el => el.phaseId === phaseId);
 
-        return childTasks.every(el => el.completed === true);
+        return childTasks.every(el => el.statusId === 3);
     },
     tasks: (parent: Phase): Task[] => {
         const phaseId = parent.id;

@@ -20,6 +20,7 @@ export type Mutation = {
   createPhase?: Maybe<Scalars['Boolean']>;
   createTask: Scalars['Boolean'];
   deletePhase?: Maybe<Scalars['Boolean']>;
+  reopenTask: Scalars['Boolean'];
   updatePhase?: Maybe<Scalars['Boolean']>;
 };
 
@@ -43,6 +44,11 @@ export type MutationCreateTaskArgs = {
 
 export type MutationDeletePhaseArgs = {
   phaseId: Scalars['Int'];
+};
+
+
+export type MutationReopenTaskArgs = {
+  taskId: Scalars['Int'];
 };
 
 
@@ -87,12 +93,19 @@ export type QueryGetTasksArgs = {
   phaseId: Scalars['Int'];
 };
 
+export type Status = {
+  __typename?: 'Status';
+  id: Scalars['Int'];
+  name: Scalars['String'];
+};
+
 export type Task = {
   __typename?: 'Task';
-  completed: Scalars['Boolean'];
   description: Scalars['String'];
   id: Scalars['Int'];
   phaseId: Scalars['Int'];
+  status: Status;
+  statusId: Scalars['Int'];
   title: Scalars['String'];
 };
 
@@ -170,6 +183,7 @@ export type ResolversTypes = {
   Mutation: ResolverTypeWrapper<{}>;
   Phase: ResolverTypeWrapper<Phase>;
   Query: ResolverTypeWrapper<{}>;
+  Status: ResolverTypeWrapper<Status>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Task: ResolverTypeWrapper<Task>;
 };
@@ -181,6 +195,7 @@ export type ResolversParentTypes = {
   Mutation: {};
   Phase: Phase;
   Query: {};
+  Status: Status;
   String: Scalars['String'];
   Task: Task;
 };
@@ -190,6 +205,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createPhase?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationCreatePhaseArgs, 'name'>>;
   createTask?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationCreateTaskArgs, 'phaseId' | 'title'>>;
   deletePhase?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationDeletePhaseArgs, 'phaseId'>>;
+  reopenTask?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationReopenTaskArgs, 'taskId'>>;
   updatePhase?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationUpdatePhaseArgs, 'name' | 'phaseId'>>;
 };
 
@@ -208,11 +224,18 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   getTasks?: Resolver<Array<ResolversTypes['Task']>, ParentType, ContextType, RequireFields<QueryGetTasksArgs, 'phaseId'>>;
 };
 
+export type StatusResolvers<ContextType = any, ParentType extends ResolversParentTypes['Status'] = ResolversParentTypes['Status']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type TaskResolvers<ContextType = any, ParentType extends ResolversParentTypes['Task'] = ResolversParentTypes['Task']> = {
-  completed?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   phaseId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  status?: Resolver<ResolversTypes['Status'], ParentType, ContextType>;
+  statusId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -221,6 +244,7 @@ export type Resolvers<ContextType = any> = {
   Mutation?: MutationResolvers<ContextType>;
   Phase?: PhaseResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Status?: StatusResolvers<ContextType>;
   Task?: TaskResolvers<ContextType>;
 };
 

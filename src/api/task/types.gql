@@ -3,7 +3,13 @@ type Task {
   phaseId: Int!
   title: String!
   description: String!
-  completed: Boolean!
+  statusId: Int!
+  status: Status!
+}
+
+type Status {
+  id: Int!
+  name: String!
 }
 
 type Query {
@@ -14,4 +20,5 @@ type Query {
 type Mutation {
   createTask(phaseId: Int!, title: String!, description: String): Boolean!
   completeTask(taskId: Int!): Boolean!
+  reopenTask(taskId: Int!): Boolean!
 }

@@ -24,6 +24,8 @@ necessary steps to be accomplished. Create a simple application that documents t
 
 Based on the assumption that we were logged in the company account, all the information accessible through this API belongs to us. Therefore, no additional verification is required. In a real app would of course have more safety locks.
 
+To reopen a task, I choose to change Task.completed field to status, so we have more flexibility
+
 # Dev tools
 
 ## Codegen
